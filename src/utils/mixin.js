@@ -1,17 +1,22 @@
 /**
  * Created by luwenwei on 18/4/15.
  */
-import commonMethods from './commonMethods';
+import axios from '../config/axiosConfig';
 let mixin = {
     data:function () {
         return {
+            loading:true,
+            baseUrl:'',
             searchKeyWord:'',
             filters:{
                 begin_time:'',
                 end_time:'',
+                order:'',
+                pageSize:20
             },
             loadDataParams:{
-
+                totalPage:100,
+                currentPage:1
             }
         }
     },
@@ -19,7 +24,7 @@ let mixin = {
     methods:{
         watchFilters: function () {
             this.$watch('filters', function(){
-                this.loadData();
+                this.loadFirstPage();
             }, {
                 deep: true
             })
@@ -39,13 +44,42 @@ let mixin = {
             this.filters[selectModel] = this[selectModel];
         },
 
-        loadData: function () {
-            let params = Object.assign({},this.loadDataParams,this.filters);
-            console.log(params)
+        loadFirstPage: function () {
+            this.loadData({currentPage:1})
+        },
+
+        loadData: function (param) {
+            Object.assign(this.loadDataParams,this.filters,param);
+            axios({
+                url:this.baseUrl,
+                method:"GET",
+                params:this.loadDataParams
+            }).then((res)=>{
+                this.dataSource = res.data.results;
+                this.loading = false;
+            })
         },
         
         editTable: function (data) {
             console.log(data)
+        },
+
+        tableAction: function (actions) {
+            let actionName = actions.actionName;
+            this[actionName](actions)
+        },
+
+        tableSort: function (data) {
+            if(!data.prop) return;
+            data.order === 'ascending' ? this.filters.order = data.prop : this.filters.order = '-' + data.prop;
+        },
+
+        handleSizeChange: function (size) {/*每页显示几条*/
+            this.filters.pageSize = size;
+        },
+
+        handleCurrentChange: function (currentPage) {/*当前页改变*/
+            this.loadData({currentPage})
         }
     },
 

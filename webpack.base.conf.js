@@ -1,7 +1,6 @@
 /**
  * Created by luwenwei on 17/9/16.
  */
-let webpack = require("webpack");
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -10,7 +9,7 @@ let env = process.env.NODE_ENV;
 let webpackConfig = {
     entry: {
         app:path.resolve(__dirname, './src/index.js'),
-        fontAwesome:path.resolve(__dirname, './node_modules/font-awesome/css/font-awesome.min.css'),
+        //fontAwesome:path.resolve(__dirname, './node_modules/font-awesome/css/font-awesome.min.css'),
     },
   
     module: {

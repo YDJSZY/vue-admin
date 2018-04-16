@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-container style="height: 100vh; border: 1px solid #eee">
+        <el-container style="height: 100vh;">
             <el-menu default-active="1-4-1"
                      style="overflow-y: auto"
                      background-color="#545c64"

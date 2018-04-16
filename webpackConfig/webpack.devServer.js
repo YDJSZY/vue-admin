@@ -2,6 +2,7 @@
  * Created by luwenwei on 17/9/14.
  */
 let MiniCssExtractPlugin = require("mini-css-extract-plugin");
+let copyWebpackPlugin = require('copy-webpack-plugin');
 let path = require('path');
 let argv = process.argv;
 let port = argv[argv.length - 1] || 3000;/*npm start -- --port 3000*/
@@ -61,6 +62,9 @@ let config = {
     },
 
     plugins:[
+        new copyWebpackPlugin([/*把以下的东东copy到自己定义的文件夹里*/
+            { from: './data.json', to: path.resolve(__dirname, '../server/') },
+            ]),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
