@@ -28,7 +28,7 @@
                     </el-form>
                 </div>
                 <div>
-                    <el-button type="primary" size="small">新增</el-button>
+                    <el-button type="primary" size="small" @click="createForm">新增</el-button>
                 </div>
             </div>
             <data-table :dataSource="dataSource" :dataModel="dataModel" :loading="loading"
@@ -40,6 +40,10 @@
                               v-on:handleSizeChange="handleSizeChange"
             >
             </table-pagination>
+            <form-edit :dataModel="dataModel" :dialogVisible.sync="formDialogVisible"
+                       v-on:confirmAction="formConfirm" v-on:afterClose="afterClose">
+
+            </form-edit>
         </el-card>
     </div>
 </template>

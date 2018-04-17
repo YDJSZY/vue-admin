@@ -13,7 +13,9 @@ let dataModel = [
     },
     {
         field:'name',
-        name:'名字'
+        name:'名字',
+        edit:true,
+        type:'text'
     },
     {
         field:'age',

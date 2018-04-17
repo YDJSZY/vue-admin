@@ -6,6 +6,7 @@ let mixin = {
     data:function () {
         return {
             loading:true,
+            formDialogVisible:false,
             baseUrl:'',
             searchKeyWord:'',
             filters:{
@@ -80,6 +81,18 @@ let mixin = {
 
         handleCurrentChange: function (currentPage) {/*当前页改变*/
             this.loadData({currentPage})
+        },
+
+        createForm: function () {
+            this.formDialogVisible = true;
+        },
+
+        formConfirm: function () {
+            
+        },
+
+        afterClose: function () {
+            console.log('close!!!')
         }
     },
 

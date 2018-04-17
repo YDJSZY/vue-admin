@@ -9,18 +9,18 @@ let port = argv[argv.length - 1] || 3000;/*npm start -- --port 3000*/
 
 let config = {
     output:{
-        path: path.resolve(__dirname, '../server/'),
-        publicPath: 'http://localhost:'+port+'/server/',
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         chunkFilename: '[name].js'
     },
 
     devServer:{
-        contentBase: path.join(__dirname, "../server"),
+        contentBase: path.join(__dirname, "dist"),
         compress: true,
         port: port,
         historyApiFallback:true,
         hot:true,
+        host:'0.0.0.0',
         inline:true,
         progress:true,
         headers: {
@@ -63,12 +63,12 @@ let config = {
 
     plugins:[
         new copyWebpackPlugin([/*把以下的东东copy到自己定义的文件夹里*/
-            { from: './data.json', to: path.resolve(__dirname, '../server/') },
+            { from: './data.json', to: path.resolve(__dirname, 'dist') },
             ]),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "css/[name].css",
+            filename: "[name].css",
             chunkFilename: "[id].css"
         }),
     ]
