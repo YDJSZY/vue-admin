@@ -8,16 +8,23 @@
             @sort-change="sort"
             :default-sort = "defaultSort"
             >
+            <el-table-column type="expand" v-if="expand">
+                <template slot-scope="props">
+                    <slot :props="props">
+                        只有在没有要分发的内容时才会显示。
+                    </slot>
+                </template>
+            </el-table-column>
             <template v-for="column in dataModel">
                 <el-table-column
-                    v-if="column.field != 'action' && !column.render"
+                    v-if="column.field != 'action' && !column.render && column.show != false"
                     :fixed="column.fixed"
                     :prop="column.field"
                     :label="column.name"
                     :sortable="column.sort">
                 </el-table-column>
                 <el-table-column
-                    v-if="column.field != 'action' && column.render"
+                    v-if="column.field != 'action' && column.render && column.show != false"
                     :fixed="column.fixed"
                     :label="column.name"
                     :prop="column.field"
@@ -48,7 +55,7 @@
 </style>
 <script>
     export default{
-        props:["dataSource","dataModel","defaultSort","loading"],
+        props:["dataSource","dataModel","defaultSort","loading","expand"],
         data(){
             return{
 

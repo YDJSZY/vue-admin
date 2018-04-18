@@ -12,6 +12,28 @@ let throttleTime = function (callback,time=500) {
     }
 }
 
+let findObjectById = function (objectList, id) {
+    for(let i = 0; i < objectList.length; ++i) {
+        let obj = objectList[i];
+        if(obj.id == id) {
+            return obj;
+        }
+    }
+    return null;
+};
+
+let findObjectIndexById = function (objectList, id) {
+    for(let i = 0; i < objectList.length; ++i) {
+        let obj = objectList[i];
+        if(obj.id == id) {
+            return i;
+        }
+    }
+    return null;
+}
+
 export {
-    throttleTime
+    throttleTime,
+    findObjectById,
+    findObjectIndexById
 };

@@ -18,10 +18,10 @@
                         <el-form-item>
                             <el-select clearable filterable v-model="filters.selectPeople" size="small" placeholder="请选择">
                                 <el-option
-                                    v-for="item in peoples"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
+                                        v-for="item in peoples"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
                                 </el-option>
                             </el-select>
                         </el-form-item>
@@ -31,16 +31,10 @@
                     <el-button type="primary" size="small" @click="createForm">新增</el-button>
                 </div>
             </div>
-            <data-table :dataSource="tableDataSource" :dataModel="dataModel" :loading="loading"
+            <data-table :dataSource="dataSource" :dataModel="dataModel" :loading="loading"
                         v-on:tableAction='tableAction' v-on:tableSort="tableSort"
                         :defaultSort="{prop: 'date', order: 'descending'}" :expand="true"
             >
-                <template slot-scope="props">
-                    <expand-table :dataSource="tableDataSource" :dataModel="dataModel" :loading="loading"
-                                v-on:tableAction='tableAction' v-on:tableSort="tableSort"
-                                :defaultSort="{prop: 'date', order: 'descending'}"
-                    ></expand-table>
-                </template>
             </data-table>
             <table-pagination :totalPage="loadDataParams.totalPage" :currentPage="loadDataParams.currentPage"
                               v-on:handleCurrentChange="handleCurrentChange"
@@ -49,7 +43,7 @@
             </table-pagination>
             <form-edit :dataModel="dataModel" :dialogVisible.sync="formDialogVisible" :dataSource="editingObject"
                        v-on:confirmAction="formConfirm" v-on:afterClose="afterClose"
-                       :selectSource="selectSource" :editType="editType"
+                       :selectSource="selectSource"
             >
             </form-edit>
         </el-card>
@@ -60,7 +54,6 @@
 </style>
 <script>
     import mixin from '../../utils/mixin';
-    import ExpandTable from './expandTable.vue';
     import dataModel from './dataModel';
     export default{
         mixins:[mixin],
@@ -68,7 +61,7 @@
             return{
                 baseUrl:'./data.json',
                 dataModel:dataModel,
-                tableDataSource:[],
+                dataSource:[],
                 filters:{selectPeople:''},
                 peoples:[
                     {label:'小明',value:'xiaoming'},
@@ -86,16 +79,17 @@
                 }
             }
         },
-        components: {
-            'expand-table': ExpandTable
+        components:{
+
         },
         created:function () {
-            self = this;
+
         },
         mounted: function () {
             this.loadFirstPage();
         },
         methods:{
+
 
         }
     }
