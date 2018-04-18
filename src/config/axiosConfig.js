@@ -1,42 +1,41 @@
 /**
  * Created by luwenwe on 2017/10/11.
  */
-import axios from 'axios';
-//import { showLoading,hideLoading } from '../utils/commonMethods';
-var hasError;
-axios.defaults.timeout = 10000;// 超时时间
+import axios from 'axios'
+let hasError
+axios.defaults.timeout = 10000 // 超时时间
 // http请求拦截器
 axios.interceptors.request.use((config) => {
-    if(config.loading){
-        //showLoading();
+    if (config.loading) {
+        // showLoading()
     }
-    return config;
+    return config
 }, (error) => {
-    console.debug(error);
-    return Promise.reject(error);
+    console.debug(error)
+    return Promise.reject(error)
 })
 // http响应拦截器
-axios.interceptors.response.use((res) => {// 响应成功关闭loading
-    if(res.config.loading){
-        //hideLoading();
+axios.interceptors.response.use((res) => { // 响应成功关闭loading
+    if (res.config.loading) {
+        // hideLoading()
     }
-    return res;
+    return res
 }, (error) => {
-    if(error.response.status == 401 || error.response.status == 403) {
-        if(!hasError) {
-            alert("登录已经失效，请重新登录。");
-            hasError = true;
+    if (error.response.status === 401 || error.response.status === 403) {
+        if (!hasError) {
+            alert('登录已经失效，请重新登录。')
+            hasError = true
         }
-        window.location.pathname = "/accounts/login/";
-        return error;
+        window.location.pathname = '/accounts/login/'
+        return error
     }
-    /*if (error.status == 404) {
-        $location.path("/404/");
+    /* if (error.status == 404) {
+        $location.path('/404/')
     }
     if (error.status == 500) {
-        $location.path("/500/");
-    }*/
-    return Promise.reject(error);
+        $location.path('/500/')
+    } */
+    return Promise.reject(error)
 })
 
-export default axios;
+export default axios

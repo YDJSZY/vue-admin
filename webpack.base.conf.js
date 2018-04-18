@@ -35,6 +35,12 @@ let webpackConfig = {
                 exclude: /node_modules/
             },
             {
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                include: [path.resolve(__dirname, 'src')], // 指定检查的目录
+            },
+            {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,  // replace ExtractTextPlugin.extract({..})

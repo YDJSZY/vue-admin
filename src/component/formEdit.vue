@@ -3,7 +3,7 @@
         <el-dialog
                 title="提示"
                 :visible="dialogVisible"
-                width="40%"
+                width="50%"
                 @close="afterClose"
                 @open="handleOpen"
                 :before-close="beforeClose">
