@@ -8,6 +8,9 @@
       "name":"lww",
       "age":26,
       "height":170,
+      "student": "daxun",
+      "header": [],
+      "work":true,
       "first_date":"2018-06-01",
       "last_date":"2018-06-06"
     },
@@ -15,6 +18,9 @@
       "id":2,
       "name":"zy",
       "age":26,
+      "work":false,
+      "student": "gaozhong",
+      "header": [],
       "height":160,
       "first_date":"2018-06-01",
       "last_date":"2018-06-06"

@@ -33,6 +33,14 @@ let dataModel = [
         type: 'text'
     },
     {
+        field: 'work',
+        name: '是否工作',
+        type: 'switch',
+        edit: true,
+        activeText: '工作中',
+        inactiveText: '待业'
+    },
+    {
         field: 'actionArea',
         name: '活动区域',
         type: 'select',
@@ -75,6 +83,21 @@ let dataModel = [
         type: 'radio',
         edit: true,
         source: 'students'
+    },
+    {
+        field: 'header',
+        name: '头像',
+        type: 'upload',
+        edit: true,
+        uploadUrl: 'http://127.0.0.1:8000/api/v1/admin/upload/',
+        default: [],
+        multiple: true
+        /*uploadSuccess (ee) {
+            console.log(ee)
+            return function (f) {
+                console.log(f)
+            }
+        }*/
     },
     {
         field: 'action',

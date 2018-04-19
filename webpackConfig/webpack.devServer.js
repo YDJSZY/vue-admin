@@ -1,11 +1,11 @@
 /**
  * Created by luwenwei on 17/9/14.
  */
-let MiniCssExtractPlugin = require("mini-css-extract-plugin");
-let copyWebpackPlugin = require('copy-webpack-plugin');
-let path = require('path');
-let argv = process.argv;
-let port = argv[argv.length - 1] || 3000;/*npm start -- --port 3000*/
+let MiniCssExtractPlugin = require("mini-css-extract-plugin")
+let CopyWebpackPlugin = require('copy-webpack-plugin')
+let path = require('path')
+let argv = process.argv
+let port = argv[argv.length - 1] || 3000 /*npm start -- --port 3000*/
 
 let config = {
     output:{
@@ -15,16 +15,16 @@ let config = {
     },
 
     devServer:{
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: port,
-        historyApiFallback:true,
-        hot:true,
-        host:'0.0.0.0',
-        inline:true,
-        progress:true,
+        historyApiFallback: true,
+        hot: true,
+        host: '0.0.0.0',
+        inline: true,
+        progress: true,
         headers: {
-            'Access-Control-Allow-Origin': '*', // 5
+            'Access-Control-Allow-Origin': '*' // 5
         },
         proxy: {
             /*'/api': {
@@ -57,21 +57,19 @@ let config = {
 
     module: {
         rules: [
-            
         ]
     },
 
-    plugins:[
-        new copyWebpackPlugin([/*把以下的东东copy到自己定义的文件夹里*/
-            { from: './data.json', to: path.resolve(__dirname, 'dist') },
-            ]),
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: './data.json', to: path.resolve(__dirname, 'dist') }]), /*把以下的东东copy到自己定义的文件夹里*/
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "[name].css",
-            chunkFilename: "[id].css"
-        }),
+            filename: '[name].css',
+            chunkFilename: '[id].css'
+        })
     ]
-};
+}
 
-module.exports = config;
+module.exports = config
