@@ -20,7 +20,7 @@
 <script>
     import dateRangeSelect from '../utils/dateRangeSelect';
     export default{
-        props: ['message'],
+        props: ['defaultDate'],
         data(){
             return{
                 value:'',
@@ -46,12 +46,12 @@
             }
         },
         methods:{
-            dateChange:function() {
+            dateChange () {
                 if(!this.value) return;
                 this.$emit('dateChange',{begin_time:+(this.value[0]),end_time:+(this.value[1])})
             }
         },
-        created:function () {
+        created () {
             this.dateRangeText.map((date)=>{
                 let obj = {};
                 obj.text = date;
@@ -62,7 +62,7 @@
                 this.pickerOptions.shortcuts.push(obj);
             })
         },
-        mounted:function() {
+        mounted () {
 
         }
     }

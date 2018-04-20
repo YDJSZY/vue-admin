@@ -11,6 +11,9 @@
       "student": "daxun",
       "header": [],
       "work":true,
+      "enabled":true,
+      "description":"很好",
+      "workDate": "Mon Sep 14 2015 08:00:00 GMT+0800 (CST)",
       "first_date":"2018-06-01",
       "last_date":"2018-06-06"
     },
@@ -19,8 +22,11 @@
       "name":"zy",
       "age":26,
       "work":false,
+      "enabled":false,
       "student": "gaozhong",
+      "description":"很美妙",
       "header": [],
+      "workDate": "Tue Sep 15 2015 08:00:00 GMT+0800 (CST)",
       "height":160,
       "first_date":"2018-06-01",
       "last_date":"2018-06-06"

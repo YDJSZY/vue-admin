@@ -1,20 +1,20 @@
 /**
  * Created by luwenwei on 17/9/14.
  */
-let MiniCssExtractPlugin = require("mini-css-extract-plugin")
+let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 let CopyWebpackPlugin = require('copy-webpack-plugin')
 let path = require('path')
 let argv = process.argv
 let port = argv[argv.length - 1] || 3000 /*npm start -- --port 3000*/
 
 let config = {
-    output:{
+    output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         chunkFilename: '[name].js'
     },
 
-    devServer:{
+    devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
         port: port,

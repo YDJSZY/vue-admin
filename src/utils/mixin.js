@@ -1,7 +1,7 @@
 /**
  * Created by luwenwei on 18/4/15.
  */
-import { findObjectIndexById } from './commonMethods'
+import { findObjectIndexById, findObjectById } from './commonMethods'
 import axios from '../config/axiosConfig'
 let mixin = {
     data () {
@@ -125,7 +125,6 @@ let mixin = {
                 this.saveFormCallBack(res)
             }).catch((e) => {
                 this.$message.error({message: '操作失败', duration: 5000})
-                this.saveFormCallBack({data: formData})
                 console.error(e)
             }) /* 提交表单 */
         },
@@ -140,8 +139,34 @@ let mixin = {
             this.closeFormDialog()
         },
 
+        beforeClose () {
+            this.formDialogVisible = false
+        },
+
         afterClose () {
             console.log('close!!!')
+        },
+
+        switchUse (data) {
+            let id = data.id
+            let enabled = data.enabled
+            let obj = {}
+            let field = data.field || 'enabled'
+            obj[field] = data.enabled
+            let url = data.url || this.baseUrl
+            axios({
+                'url': url + id + '/',
+                'method': 'PATCH',
+                'data': obj
+            }).then((res) => {
+                let e = enabled ? '已启用' : '已禁用'
+                let tableRowData = findObjectById(this.tableDataSource, id)
+                tableRowData[field] = enabled
+                this.$message.success({message: e, duration: 5000})
+            }).catch((e) => {
+                this.$message.error({message: '操作失败', duration: 5000})
+                console.error(e)
+            })
         }
     },
 

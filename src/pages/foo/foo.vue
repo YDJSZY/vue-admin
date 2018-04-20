@@ -8,7 +8,7 @@
                 <div class="some-filter">
                     <el-form :inline="true" class="demo-form-inline">
                         <el-form-item>
-                            <dateRange v-on:dateChange='dateChange'></dateRange>
+                            <dateRange v-on:dateChange='dateChange' defaultDate="今天"></dateRange>
                         </el-form-item>
                         <el-form-item>
                             <el-input size="small" type='text' placeholder="搜索" @clear="searchData" @keyup.enter.native="searchData" v-model="searchKeyWord" clearable>
@@ -48,7 +48,7 @@
             >
             </table-pagination>
             <form-edit :dataModel="dataModel" :dialogVisible.sync="formDialogVisible" :dataSource="editingObject"
-                       v-on:confirmAction="formConfirm" v-on:afterClose="afterClose"
+                       v-on:confirmAction="formConfirm" v-on:afterClose="afterClose" v-on:beforeClose="beforeClose"
                        :selectSource="selectSource" :editType="editType"
             >
             </form-edit>
@@ -66,7 +66,7 @@
         mixins:[mixin],
         data(){
             return{
-                baseUrl:'./data.json',
+                baseUrl:'./data.json/',
                 dataModel:dataModel,
                 tableDataSource:[],
                 filters:{selectPeople:''},

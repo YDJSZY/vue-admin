@@ -15,6 +15,10 @@ const foo = function (resolve) {
 
 const routes = [
     {
+        path: '/',
+        redirect: '/foo' // 设置默认指向的路径
+    },
+    {
         path: '/bar',
         components: {
             default: bar

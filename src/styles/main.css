@@ -45,3 +45,11 @@ body{
     color: #ffffff;
     text-decoration: none;
 }
+
+.text-warning{
+    color: #e6a23c !important;
+}
+
+.text-primary{
+    color: #409EFF !important;
+}

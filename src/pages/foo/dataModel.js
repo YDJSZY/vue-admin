@@ -85,11 +85,22 @@ let dataModel = [
         source: 'students'
     },
     {
+        field: 'workDate',
+        name: '参加工作时间',
+        type: 'date',
+        dateType: 'date',
+        edit: true,
+        render: {
+            props: ['scopeData'],
+            template: `<span>{{this.scopeData.row.workDate | date('YYYY-MM-DD')}}</span>`
+        }
+    },
+    {
         field: 'header',
         name: '头像',
         type: 'upload',
         edit: true,
-        uploadUrl: 'http://127.0.0.1:8000/api/v1/admin/upload/',
+        uploadUrl: 'http://jsonplaceholder.typicode.com/posts/',
         default: [],
         multiple: true
         /*uploadSuccess (ee) {
@@ -100,14 +111,20 @@ let dataModel = [
         }*/
     },
     {
+        field: 'description',
+        name: '描述',
+        type: 'textarea',
+        edit: true
+    },
+    {
         field: 'action',
         action: {
             props: ['scopeData'],
-            template: `<div><el-button type="text" size="small" @click="check">查看</el-button>
+            template: `<div><el-button type="text" size="small" :class="{'text-primary':!scopeData.row.enabled,'text-warning':scopeData.row.enabled}" @click="switchUse">{{scopeData.row.enabled ? '禁用' : '启用'}}</el-button>
                 <el-button type="text" size="small" @click="edit">编辑</el-button></div>`,
             methods: {
-                check: function () {
-                    this.$emit('action', {actionName: 'check', row: this.scopeData.row})
+                switchUse: function () {
+                    this.$emit('action', {actionName: 'switchUse', id: this.scopeData.row.id, enabled: !this.scopeData.row.enabled})
                 },
                 edit: function () {
                     this.$emit('action', {actionName: 'editTable', row: this.scopeData.row})

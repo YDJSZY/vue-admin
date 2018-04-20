@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-container style="height: 100vh;">
-            <el-menu default-active="1-4-1"
+            <el-menu default-active="1-1"
                      style="overflow-y: auto"
                      background-color="#545c64"
                      text-color="#fff"
@@ -16,13 +16,13 @@
                         <span slot="title">导航一</span>
                     </template>
                     <el-menu-item-group>
-                        <el-menu-item index="2">
+                        <el-menu-item index="1-1">
                             <router-link to="/foo">
                                 <i class="el-icon-menu"></i>
                                 Foo
                             </router-link>
                         </el-menu-item>
-                        <el-menu-item index="3">
+                        <el-menu-item index="1-2">
                             <router-link to="/bar">
                                 <i class="el-icon-document"></i>
                                 Bar

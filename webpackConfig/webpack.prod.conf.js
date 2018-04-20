@@ -1,11 +1,10 @@
 /**
  * Created by luwenwei on 17/9/13.
  */
-let webpack = require('webpack');
-let path = require('path');
-let UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-let MiniCssExtractPlugin = require("mini-css-extract-plugin");
-let OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+let path = require('path')
+let UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+let MiniCssExtractPlugin = require('mini-css-extract-plugin')
+let OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 let config = {
     output: {
         path: path.resolve(__dirname, '../dist/'),
@@ -16,7 +15,6 @@ let config = {
 
     module: {
         rules: [
-            
         ]
     },
 
@@ -35,10 +33,10 @@ let config = {
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: "css/[name].[contenthash:8].css",
-            chunkFilename: "[id].css"
-        }),
-    ],
+            filename: 'css/[name].[contenthash:8].css',
+            chunkFilename: '[id].css'
+        })
+    ]
 }
 
-module.exports = config;
+module.exports = config
