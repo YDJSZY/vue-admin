@@ -13,7 +13,7 @@ let dataModel = [
     },
     {
         field: 'name',
-        name: '名字',
+        name: '名字la',
         edit: true,
         type: 'text',
         rules: [
@@ -62,6 +62,7 @@ let dataModel = [
         name: '活动时间',
         type: 'dateRange',
         edit: true,
+        width: 200,
         firstDate: {
             type: 'date',
             placeholder: '选择开始日期',
@@ -88,6 +89,7 @@ let dataModel = [
         field: 'workDate',
         name: '参加工作时间',
         type: 'date',
+        width: 120,
         dateType: 'date',
         edit: true,
         render: {

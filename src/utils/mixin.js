@@ -6,6 +6,7 @@ import axios from '../config/axiosConfig'
 let mixin = {
     data () {
         return {
+            dateRangeName: '昨天',
             editType: '',
             loading: true,
             formDialogVisible: false,
@@ -13,13 +14,13 @@ let mixin = {
             searchKeyWord: '',
             editingObject: {},
             filters: {
-                begin_time: '',
-                end_time: '',
                 order: '',
                 pageSize: 20
             },
             loadDataParams: {
-                totalPage: 100,
+                begin_time: void 0,
+                end_time: void 0,
+                totalPage: 1,
                 currentPage: 1
             }
         }
@@ -35,8 +36,10 @@ let mixin = {
         },
 
         dateChange (dateRange) {
-            this.filters.begin_time = dateRange.begin_time
-            this.filters.end_time = dateRange.end_time
+            this.loadDataParams.begin_time = dateRange.begin_time
+            this.loadDataParams.end_time = dateRange.end_time
+            if (dateRange.isInitDate) return
+            this.loadFirstPage()
         },
 
         searchData () {
@@ -59,9 +62,13 @@ let mixin = {
                 method: 'GET',
                 params: this.loadDataParams
             }).then((res) => {
-                this.tableDataSource = res.data.results
-                this.loading = false
+                this.parseResponse(res)
             })
+        },
+
+        parseResponse (res) {
+            this.tableDataSource = res.data.results
+            this.loading = false
         },
 
         tableAction (actions) {
@@ -87,13 +94,12 @@ let mixin = {
 
         editTable (data) {
             this.editType = 'edit'
-            this.editingObject = JSON.parse(JSON.stringify(data.row))
+            this.editingObject = JSON.parse(JSON.stringify(data.row)) /* 深拷贝 */
             this.beforeEdit()
             this.openFormDialog()
         },
 
         beforeCreateForm () {
-
         },
 
         createForm () {
@@ -109,6 +115,7 @@ let mixin = {
 
         closeFormDialog () {
             this.formDialogVisible = false
+            console.log(this.formDialogVisible)
         },
 
         formConfirm (formData) {
@@ -141,6 +148,7 @@ let mixin = {
 
         beforeClose () {
             this.formDialogVisible = false
+            console.log(this.formDialogVisible)
         },
 
         afterClose () {

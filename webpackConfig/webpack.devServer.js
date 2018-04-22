@@ -1,6 +1,7 @@
 /**
  * Created by luwenwei on 17/9/14.
  */
+let webpack = require('webpack')
 let MiniCssExtractPlugin = require('mini-css-extract-plugin')
 let CopyWebpackPlugin = require('copy-webpack-plugin')
 let path = require('path')
@@ -61,8 +62,12 @@ let config = {
     },
 
     plugins: [
+        new webpack.HotModuleReplacementPlugin(), //调用webpack的热更新插件
         new CopyWebpackPlugin([
-            { from: './data.json', to: path.resolve(__dirname, 'dist') }]), /*把以下的东东copy到自己定义的文件夹里*/
+            { from: './constants.json', to: path.resolve(__dirname, 'dist') },
+            { from: './myinfo.json', to: path.resolve(__dirname, 'dist') },
+            { from: './data.json', to: path.resolve(__dirname, 'dist') }
+        ]), /*把以下的东东copy到自己定义的文件夹里*/
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional

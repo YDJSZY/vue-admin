@@ -8,7 +8,7 @@
                 <div class="some-filter">
                     <el-form :inline="true" class="demo-form-inline">
                         <el-form-item>
-                            <dateRange v-on:dateChange='dateChange' defaultDate="今天"></dateRange>
+                            <dateRange v-on:dateChange='dateChange' :defaultDateRange="dateRangeName"></dateRange>
                         </el-form-item>
                         <el-form-item>
                             <el-input size="small" type='text' placeholder="搜索" @clear="searchData" @keyup.enter.native="searchData" v-model="searchKeyWord" clearable>
@@ -32,15 +32,15 @@
                 </div>
             </div>
             <data-table :dataSource="tableDataSource" :dataModel="dataModel" :loading="loading"
-                        v-on:tableAction='tableAction' v-on:tableSort="tableSort"
-                        :defaultSort="{prop: 'date', order: 'descending'}" :expand="true"
+                        v-on:tableAction='tableAction' v-on:tableSort="tableSort" :showCheckBox="true"
+                        :defaultSort="{prop: 'date', order: 'descending'}" :expand="false"
             >
-                <template slot-scope="props">
+                <!--<template slot-scope="props">
                     <expand-table :dataSource="tableDataSource" :dataModel="dataModel" :loading="loading"
                                 v-on:tableAction='tableAction' v-on:tableSort="tableSort"
                                 :defaultSort="{prop: 'date', order: 'descending'}"
                     ></expand-table>
-                </template>
+                </template>嵌套-->
             </data-table>
             <table-pagination :totalPage="loadDataParams.totalPage" :currentPage="loadDataParams.currentPage"
                               v-on:handleCurrentChange="handleCurrentChange"
@@ -90,7 +90,7 @@
             'expand-table': ExpandTable
         },
         created:function () {
-            self = this;
+            console.log(this.$myInfo)
         },
         mounted: function () {
             this.loadFirstPage();

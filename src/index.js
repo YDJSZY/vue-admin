@@ -11,6 +11,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import './styles/main.css'
 import './utils/globalComponent'
 import './utils/globalFilters'
+import axios from './config/axiosConfig'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
@@ -24,20 +25,49 @@ router.beforeEach(function (to, from, next) {
     next()
 })
 
-new Vue({
-    router,
-    data: {
-    },
-    computed: {
-    },
-    methods: {
-    },
-    beforeCreate: function () {
+let store
 
-    },
-    created: function () {
-    },
-    mounted: function () {
+let createStore = (myInfo = {}, constant = []) => {
+    store = new Vuex.Store({
+        state: {
+            myInfo,
+            constant
+        }
+    })
+}
 
-    }
-}).$mount('#app')
+let createApp = (myInfo, constants) => {
+    new Vue({
+        store,
+        router,
+        data: {
+        },
+        computed: {
+        },
+        methods: {
+        },
+        beforeCreate: function () {
+
+        },
+        created: function () {
+            Vue.prototype.$myInfo = myInfo
+            Vue.prototype.$constants = constants
+        },
+        mounted: function () {
+
+        }
+    }).$mount('#app')
+}
+
+(async function () {
+    let myInfoRes = await axios.get('/myinfo.json/')
+    let myInfo = myInfoRes.data.data
+    let constantsRes = await axios.get('/constants.json/')
+    let constants = constantsRes.data.data
+    createStore(myInfo, constants)
+    createApp(myInfo, constants)
+}())
+
+if (module.hot) {
+    module.hot.accept()
+}

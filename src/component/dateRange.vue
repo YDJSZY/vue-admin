@@ -5,7 +5,7 @@
                 v-model="value"
                 type="daterange"
                 align="left"
-                unlink-panels
+                :unlink-panels="true"
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
@@ -18,16 +18,16 @@
 
 </style>
 <script>
-    import dateRangeSelect from '../utils/dateRangeSelect';
+    import dateRangeSelect from '../utils/dateRangeSelect'
     export default{
-        props: ['defaultDate'],
+        props: ['defaultDateRange'],
         data(){
             return{
-                value:'',
-                pickerOptions:{
-                    shortcuts:[]
+                value: [new Date(), new Date()],
+                pickerOptions: {
+                    shortcuts: []
                 },
-                dateRangeText:[
+                dateRangeText: [
                     '今天',
                     '昨天',
                     '前天',
@@ -45,25 +45,29 @@
                 ]
             }
         },
-        methods:{
-            dateChange () {
-                if(!this.value) return;
-                this.$emit('dateChange',{begin_time:+(this.value[0]),end_time:+(this.value[1])})
+        methods: {
+            dateChange (isInitDate) {
+                if (!this.value) return
+                this.$emit('dateChange', {begin_time: +(this.value[0]), end_time: +(this.value[1]), isInitDate: typeof isInitDate === 'boolean' ? true : false})
             }
         },
         created () {
-            this.dateRangeText.map((date)=>{
-                let obj = {};
-                obj.text = date;
-                obj.onClick = function(picker) {
-                    let dateRange = dateRangeSelect(date);
-                    picker.$emit('pick', [dateRange.begin_time, dateRange.end_time]);
-                };
-                this.pickerOptions.shortcuts.push(obj);
+            this.dateRangeText.map((date) => {
+                let obj = {}
+                obj.text = date
+                obj.onClick = function (picker) {
+                    let dateRange = dateRangeSelect(date)
+                    picker.$emit('pick', [dateRange.begin_time, dateRange.end_time])
+                }
+                this.pickerOptions.shortcuts.push(obj)
             })
         },
         mounted () {
-
+            if (this.defaultDateRange) {
+                let dateRange = dateRangeSelect(this.defaultDateRange)
+                this.value = [dateRange.begin_time, dateRange.end_time]
+                this.dateChange(true)
+            }
         }
     }
 </script>
